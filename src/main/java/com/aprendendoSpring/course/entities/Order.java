@@ -12,21 +12,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable{
-	
+public class Order implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private Instant moment;
-	
-	@ManyToOne  //transformando em chave estrangeira 
-	@JoinColumn(name = "client_id") // nome da chave estrangeira 
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD'T'HH:mm:ss 'Z'", timezone = "GMT")
+
+	@ManyToOne // transformando em chave estrangeira
+	@JoinColumn(name = "client_id") // nome da chave estrangeira
 	private User client;
 
+	public Order() {
+		super();
+	}
 
 	public Order(long id, Instant moment, User client) {
 		super();
@@ -35,47 +43,34 @@ public class Order implements Serializable{
 		this.client = client;
 	}
 
-
-	public Order() {
-		super();
-	}
-
-
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
 	public Instant getMoment() {
 		return moment;
 	}
-
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 
-
 	public User getClient() {
 		return client;
 	}
-
 
 	public void setClient(User client) {
 		this.client = client;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -88,7 +83,5 @@ public class Order implements Serializable{
 		Order other = (Order) obj;
 		return id == other.id;
 	}
-	
-	
 
 }
