@@ -30,9 +30,9 @@ public class TestConfig implements CommandLineRunner {
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 	
 		
-		Order o1 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u2);
-		Order o2 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
-		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u2);
+		Order o1 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),u2);
+		Order o2 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),u1);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),u2);
 	
 		
 		

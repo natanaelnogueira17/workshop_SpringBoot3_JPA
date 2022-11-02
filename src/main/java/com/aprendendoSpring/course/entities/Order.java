@@ -12,9 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.aprendendoSpring.course.orderStatus.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 @Entity
 @Table(name = "tb_order")
@@ -31,15 +30,18 @@ public class Order implements Serializable {
 	@ManyToOne // transformando em chave estrangeira
 	@JoinColumn(name = "client_id") // nome da chave estrangeira
 	private User client;
+	
+	private Integer orderStatus;
 
 	public Order() {
 		super();
 	}
 
-	public Order(long id, Instant moment, User client) {
+	public Order(long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		setOrderStatus( orderStatus);
 		this.client = client;
 	}
 
@@ -67,6 +69,19 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+	
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if (orderStatus!= null) {
+			this.orderStatus = orderStatus.getCode();
+			
+		}
+	}
+	
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -83,5 +98,6 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return id == other.id;
 	}
+
 
 }
