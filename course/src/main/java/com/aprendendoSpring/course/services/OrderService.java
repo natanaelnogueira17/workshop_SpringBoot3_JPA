@@ -7,20 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aprendendoSpring.course.entities.Order;
-import com.aprendendoSpring.course.repositorys.Orderrepository;
+import com.aprendendoSpring.course.repositorys.OrderRepository;
 
 
 @Service
 public class OrderService {
 	@Autowired
-	private Orderrepository orderRepository;
+	private OrderRepository repository;
 	
 	public List<Order> findAll(){
-		return orderRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public Order findById(Long Id) {
-		Optional <Order> obj = orderRepository.findById(Id);
+		Optional <Order> obj = repository.findById(Id);
 		return obj.get();
 	}
 	

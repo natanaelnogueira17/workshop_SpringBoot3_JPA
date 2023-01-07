@@ -10,13 +10,14 @@ import org.springframework.context.annotation.Profile;
 
 import com.aprendendoSpring.course.entities.Category;
 import com.aprendendoSpring.course.entities.OrderItem;
+import com.aprendendoSpring.course.entities.Payment;
 import com.aprendendoSpring.course.entities.Order;
 import com.aprendendoSpring.course.entities.Product;
 import com.aprendendoSpring.course.entities.User;
 import com.aprendendoSpring.course.entities.enums.OrdersStatus;
 import com.aprendendoSpring.course.repositorys.CategoryRepository;
 import com.aprendendoSpring.course.repositorys.OrderItemRepository;
-import com.aprendendoSpring.course.repositorys.Orderrepository;
+import com.aprendendoSpring.course.repositorys.OrderRepository;
 import com.aprendendoSpring.course.repositorys.ProductRepository;
 import com.aprendendoSpring.course.repositorys.UserRepository;
 
@@ -27,7 +28,7 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired    // mesma coisa de instanciar o UserRepository
 	private UserRepository userRepository;
 	@Autowired
-	private Orderrepository orderrepository;
+	private OrderRepository orderrepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
@@ -75,6 +76,10 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		orderrepository.save(o1);
 	
 	}
 

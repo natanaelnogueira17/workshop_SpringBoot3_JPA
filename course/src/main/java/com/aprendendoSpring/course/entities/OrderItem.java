@@ -47,7 +47,7 @@ public class OrderItem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
