@@ -30,8 +30,8 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
-	@Autowired
-	@OneToMany
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
 	private List<Order>listOrders = new ArrayList<Order>();
 	
 	public User() {
